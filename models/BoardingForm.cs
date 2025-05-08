@@ -1,0 +1,48 @@
+using System.ComponentModel.DataAnnotations;
+using Utils;
+
+namespace Models
+{
+    public class BoardingForm
+    {
+        [Key]
+        public string Id { get; private set; }
+
+        [Required(ErrorMessage = "Please enter the name of the pet owner.")]
+        public BoardedAnimal BoardedAnimal { get; set; }
+
+        [Required(ErrorMessage = "Please enter the name of the pet.")]
+        public DateTime StartDate { get; set; }
+
+        [Required(ErrorMessage = "Please enter the name of the pet.")]
+        public DateTime EndDate { get; set; }
+
+        [Required(ErrorMessage = "Please choose a payment method.")]
+        public PaymentType PaymentType { get; set; }
+
+        // Я думаю все ж варто додати вартість здачі тварини на піклування
+        // public decimal Price { get; set; } 
+
+
+        private BoardingForm(BoardedAnimal boardedAnimal, DateTime startDate, DateTime endDate, PaymentType paymentType)
+        {
+            Id = Guid.NewGuid().ToString();
+            BoardedAnimal = boardedAnimal;
+            StartDate = startDate;
+            EndDate = endDate;
+            PaymentType = paymentType;
+        }
+
+        public override string ToString()
+        {
+            return $"BoardingForm: {Id}, BoardedAnimal: {BoardedAnimal.ToString}, StartDate: {StartDate}, EndDate: {EndDate}, PaymentType: {PaymentType}";
+        }
+
+        public static BoardingForm Create(BoardedAnimal boardedAnimal, DateTime startDate, DateTime endDate, PaymentType paymentType)
+        {
+            var boardingForm = new BoardingForm(boardedAnimal, startDate, endDate, paymentType);
+            ValidatorUtils.ValidateEntity(boardingForm);
+            return boardingForm;
+        }
+    }
+}
