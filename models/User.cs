@@ -29,13 +29,13 @@ namespace Models
         [Required]
         public bool IsActiveProfile { get; set; }
 
-        private User(string name, string phoneNumber, string email, string password)
+        private User(string name, string phoneNumber, string email, string hashedPassword)
         {
             Id = Guid.NewGuid().ToString();
             Name = name;
             PhoneNumber = phoneNumber;
             Email = email;
-            PasswordHash = HashUtils.HashPassword(password);
+            PasswordHash = hashedPassword;
             Role = Role.USER_ROLE;
             IsActiveProfile = true;
         }
@@ -45,9 +45,9 @@ namespace Models
             return $"User: {Name}, Phone: {PhoneNumber}, Email: {Email}, Role: {Role}, Active: {IsActiveProfile}";
         }
 
-        public static User Create(string name, string phoneNumber, string email, string password)
+        public static User Create(string name, string phoneNumber, string email, string hashedPassword)
         {
-            var user = new User(name, phoneNumber, email, password);
+            var user = new User(name, phoneNumber, email, hashedPassword);
             ValidatorUtils.ValidateEntity(user);
             return user;
         }

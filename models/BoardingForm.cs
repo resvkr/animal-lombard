@@ -20,8 +20,8 @@ namespace Models
         [Required(ErrorMessage = "Please choose a payment method.")]
         public PaymentType PaymentType { get; set; }
 
-        // Я думаю все ж варто додати вартість здачі тварини на піклування
-        // public decimal Price { get; set; } 
+        [Required(ErrorMessage = "Please enter the price of the boarding.")]
+        public decimal Price { get; set; }
 
 
         private BoardingForm(BoardedAnimal boardedAnimal, DateTime startDate, DateTime endDate, PaymentType paymentType)
@@ -35,7 +35,7 @@ namespace Models
 
         public override string ToString()
         {
-            return $"BoardingForm: {Id}, BoardedAnimal: {BoardedAnimal.ToString}, StartDate: {StartDate}, EndDate: {EndDate}, PaymentType: {PaymentType}";
+            return $"BoardingForm: {Id}, BoardedAnimal: {BoardedAnimal}, StartDate: {StartDate}, EndDate: {EndDate}, PaymentType: {PaymentType}";
         }
 
         public static BoardingForm Create(BoardedAnimal boardedAnimal, DateTime startDate, DateTime endDate, PaymentType paymentType)
