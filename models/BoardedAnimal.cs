@@ -5,7 +5,7 @@ namespace Models
 {
     public class BoardedAnimal : Animal
     {
-        [Required(ErrorMessage = "User ID is required.")]
+        [Required(ErrorMessage = "Owner ID is required.")]
         public string OwnerId { get; set; }
 
         [Required]
