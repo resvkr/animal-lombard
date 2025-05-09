@@ -24,23 +24,24 @@ namespace Models
         public decimal Price { get; set; }
 
 
-        private BoardingForm(BoardedAnimal boardedAnimal, DateTime startDate, DateTime endDate, PaymentType paymentType)
+        private BoardingForm(BoardedAnimal boardedAnimal, DateTime startDate, DateTime endDate, PaymentType paymentType, decimal price)
         {
             Id = Guid.NewGuid().ToString();
             BoardedAnimal = boardedAnimal;
             StartDate = startDate;
             EndDate = endDate;
             PaymentType = paymentType;
+            Price = price;
         }
 
         public override string ToString()
         {
-            return $"BoardingForm: {Id}, BoardedAnimal: {BoardedAnimal}, StartDate: {StartDate}, EndDate: {EndDate}, PaymentType: {PaymentType}";
+            return $"BoardingForm: {Id}, BoardedAnimal: {BoardedAnimal}, StartDate: {StartDate}, EndDate: {EndDate}, PaymentType: {PaymentType}, Price: {Price}";
         }
 
-        public static BoardingForm Create(BoardedAnimal boardedAnimal, DateTime startDate, DateTime endDate, PaymentType paymentType)
+        public static BoardingForm Create(BoardedAnimal boardedAnimal, DateTime startDate, DateTime endDate, PaymentType paymentType, decimal price)
         {
-            var boardingForm = new BoardingForm(boardedAnimal, startDate, endDate, paymentType);
+            var boardingForm = new BoardingForm(boardedAnimal, startDate, endDate, paymentType, price);
             ValidatorUtils.ValidateEntity(boardingForm);
             return boardingForm;
         }
