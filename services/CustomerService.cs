@@ -156,7 +156,7 @@ public class CustomerService
         };
         Console.WriteLine("Species: ");
         var species = Console.ReadLine();
-        var owner = AppContext.CurrentUser;
+        var ownerId = AppContext.CurrentUser.Id;
         Console.WriteLine("Feeding type: ");
         var feedingTypeString = Console.ReadLine();
         FeedingType feedingType = feedingTypeString switch
@@ -170,7 +170,7 @@ public class CustomerService
         var address = Console.ReadLine();
         Console.WriteLine("City: ");
         var city = Console.ReadLine();
-        var boardedAnimal = BoardedAnimal.Create(name, animalType, species, owner, feedingType, address, city);
+        var boardedAnimal = BoardedAnimal.Create(name, animalType, species, ownerId, feedingType, address, city);
         Console.WriteLine("Provide information about boarding: ");
         Console.WriteLine("Start date: ");
         var startDateString = Console.ReadLine();
@@ -186,6 +186,20 @@ public class CustomerService
             "Card" => PaymentType.CREDIT_CARD,
             _ => throw new Exception("Invalid payment type")
         };
-        return BoardingForm.Create(boardedAnimal, startDate, endDate, paymentType);
+        var timeDiff = endDate - startDate;
+        if (timeDiff.Days < 0)
+        {
+            Console.WriteLine("Invalid date range");
+            throw new Exception("Invalid date range");
+        }
+
+        decimal boardingPrice = timeDiff.Days * 20 + 50 * feedingType switch
+        {
+            FeedingType.DRY => 1,
+            FeedingType.WET => 2,
+            FeedingType.MIXED => 3,
+            _ => throw new Exception("Invalid feeding type")
+        };
+        return BoardingForm.Create(boardedAnimal, startDate, endDate, paymentType, boardingPrice);
     }
 }
