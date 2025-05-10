@@ -1,17 +1,19 @@
-﻿using animal_lombart.interfaces;
+﻿
+using AnimalLombart.Repository.Interfaces;
 using Models;
 
-namespace animal_lombart.repository;
+namespace AnimaLombart.Repository;
 
 public class ProductRepository : IRepository<Product>
 {
     private List<Product> products = new();
     public void Save(Product entity)
     {
-        var id = products.FindIndex(u => u.Id == entity.Id);
-        if (id >= 0)
+        var existing = products.Find(u => u.Id == entity.Id);
+        if (existing != null)
         {
-            products[id] = entity;
+            var index = products.IndexOf(existing);
+            products[index] = entity;
         }
         else
         {

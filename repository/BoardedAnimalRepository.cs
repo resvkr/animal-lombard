@@ -1,17 +1,19 @@
-﻿using animal_lombart.interfaces;
+﻿
+using AnimalLombart.Repository.Interfaces;
 using Models;
 
-namespace animal_lombart.repository;
+namespace AnimalLombart.Repository;
 
 public class BoardedAnimalRepository : IRepository<BoardedAnimal>
 {
     private List<BoardedAnimal> boardedAnimals = new();
     public void Save(BoardedAnimal entity)
     {
-        var id = boardedAnimals.FindIndex(u => u.Id == entity.Id);
-        if (id >= 0)
+        var existing = boardedAnimals.Find(u => u.Id == entity.Id);
+        if (existing != null)
         {
-            boardedAnimals[id] = entity;
+            var index = boardedAnimals.IndexOf(existing);
+            boardedAnimals[index] = entity;
         }
         else
         {

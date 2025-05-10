@@ -1,7 +1,8 @@
-﻿using animal_lombart.interfaces;
+﻿
+using AnimalLombart.Repository.Interfaces;
 using Models;
 
-namespace animal_lombart.repository;
+namespace AnimaLombart.Repository;
 
 public class DataStore
 {

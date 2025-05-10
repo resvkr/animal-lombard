@@ -1,17 +1,19 @@
-﻿using animal_lombart.interfaces;
+﻿
+using AnimalLombart.Repository.Interfaces;
 using Models;
 
-namespace animal_lombart.repository;
+namespace AnimaLombart.Repository;
 
 public class OrderRepository : IRepository<Order>
 {
     private List<Order> orders = new();
     public void Save(Order entity)
     {
-        var id = orders.FindIndex(u => u.Id == entity.Id);
-        if (id >= 0)
+        var existing = orders.Find(u => u.Id == entity.Id);
+        if (existing != null)
         {
-            orders[id] = entity;
+            var index = orders.IndexOf(existing);
+            orders[index] = entity;
         }
         else
         {

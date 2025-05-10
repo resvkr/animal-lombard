@@ -1,5 +1,5 @@
 ﻿
-namespace animal_lombart.interfaces;
+namespace AnimalLombart.Repository.Interfaces;
 
 public interface IRepository <T> where T : class{
     public void Save(T entity);

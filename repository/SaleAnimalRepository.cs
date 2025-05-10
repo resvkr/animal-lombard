@@ -1,7 +1,8 @@
-﻿using animal_lombart.interfaces;
+﻿
+using AnimalLombart.Repository.Interfaces;
 using Models;
 
-namespace animal_lombart.repository;
+namespace AnimaLombart.Repository;
 
 public class SaleAnimalRepository : IRepository<SaleAnimal>
 {
@@ -11,10 +12,11 @@ public class SaleAnimalRepository : IRepository<SaleAnimal>
     
     public void Save(SaleAnimal entity)
     {
-        var id = saleAnimals.FindIndex(u => u.Id == entity.Id);
-        if (id >= 0)
+        var existing = saleAnimals.Find(u => u.Id == entity.Id);
+        if (existing != null)
         {
-            saleAnimals[id] = entity;
+            var index = saleAnimals.IndexOf(existing);
+            saleAnimals[index] = entity;
         }
         else
         {
