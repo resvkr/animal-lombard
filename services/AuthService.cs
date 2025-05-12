@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using AnimaLombart.Repository;
+using Models;
 
 namespace Services;
 
@@ -27,7 +28,7 @@ public class AuthService
         User user = _userRepository.FindByEmail(email);
         if (user != null) throw new Exception("User already exists");
         user = User.Create(name, phone, email, passwordHash);
-        _userRepository.save(user);
+        _userRepository.Save(user);
     }
 
     public void logout()

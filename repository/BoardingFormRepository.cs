@@ -1,6 +1,5 @@
 ﻿using AnimalLombart.Repository.Interfaces;
 using Models;
-
 namespace AnimaLombart.Repository;
 
 public class BoardingFormRepository : IRepository<BoardingForm>
