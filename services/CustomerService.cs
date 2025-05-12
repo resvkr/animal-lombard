@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using AnimaLombart.Repository;
+using Models;
 
 namespace Services;
 
@@ -98,7 +99,7 @@ public class CustomerService
 
     public Order PlaceOrder()
     {
-        int totalPrice = 0;
+        decimal totalPrice = 0;
         User user = AppContext.CurrentUser;
         Console.WriteLine("Enter ID of pet you would like to buy: ");
         var id = Console.ReadLine();

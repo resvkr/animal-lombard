@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using AnimaLombart.Repository;
+using Models;
 
 namespace Services;
 
@@ -11,14 +12,14 @@ public class ProductService
     }
     public void AddProduct(Product product)
     {
-        _productRepository.save(product);
+        _productRepository.Save(product);
     }
     public void UpdateProduct(Product product)
     {
-        _productRepository.save(product);
+        _productRepository.Save(product);
     }
     public void DeleteProduct(string productId)
     {
-        _productRepository.delete(productId);
+        _productRepository.Delete(productId);
     }
 }

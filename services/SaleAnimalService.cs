@@ -1,4 +1,4 @@
-﻿using Repository;
+﻿using AnimaLombart.Repository;
 using Models;
 
 namespace Services;
@@ -12,16 +12,16 @@ public class SaleAnimalService : IAnimalService
     }
     public void AddAnimal(Animal animal)
     {
-        _saleAnimalRepository.save(animal);
+        _saleAnimalRepository.Save((SaleAnimal)animal);
     }
 
     public void DeleteAnimal(string id)
     {
-        _saleAnimalRepository.delete(id);
+        _saleAnimalRepository.Delete(id);
     }
 
     public void UpdateAnimal(Animal animal)
     {
-        _saleAnimalRepository.save(animal);
+        _saleAnimalRepository.Save((SaleAnimal)animal);
     }
 }
