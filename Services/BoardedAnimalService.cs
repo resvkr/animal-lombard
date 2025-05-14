@@ -46,6 +46,23 @@ public class BoardedAnimalService : IAnimalService<BoardedAnimal>
         return boardedAnimal;
     }
 
+    public List<BoardedAnimal> GetBoardedAnimalsList(int page = 0, int pageSize = 10)
+    {
+        var userId = _userContext.CurrentUser?.Id;
+        
+        if (userId is null)
+            throw new InvalidOperationException("User is not logged in.");
+        
+        if (page < 0) throw new ArgumentOutOfRangeException(nameof(page), "Page must be >= 0");
+        if (pageSize <= 0) throw new ArgumentOutOfRangeException(nameof(pageSize), "PageSize must be > 0");
+
+        var boardedAnimals = _boardedAnimalRepository.FindByUserId(userId);
+        
+        return boardedAnimals
+            .Skip(page * pageSize)
+            .Take(pageSize)
+            .ToList();
+    }
     public void AddAnimal(BoardedAnimal animal)
     {
         _boardedAnimalRepository.Save(animal);

@@ -41,13 +41,15 @@ public class App
         var orderView = new OrderView(orderService);
         var productView = new ProductView(productService);
         var saleAnimalView = new SaleAnimalView(saleAnimalService);
+        var adminView = new AdminView(adminService);
         var mainView = new MainView(
             userContext,
             saleAnimalView,
             authView,
             productView,
             orderView,
-            boardedAnimalView
+            boardedAnimalView,
+            adminView
         );
         
         mainView.ShowMainMenu();

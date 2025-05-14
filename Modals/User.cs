@@ -37,7 +37,7 @@ public class User
 
     public override string ToString()
     {
-        return $"User: {Name}, Phone: {PhoneNumber}, Email: {Email}, Role: {Role}, Active: {IsActiveProfile}";
+        return $"User: {Name}, Phone: {PhoneNumber}, Email: {Email}, Role: {Role.ToString()}, Active: {IsActiveProfile}";
     }
 
     public static User Create(string name, string phoneNumber, string email, string hashedPassword)

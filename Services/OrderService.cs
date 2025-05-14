@@ -28,11 +28,11 @@ public class OrderService
         try
         {
             _orderContext.SetPaymentType(paymentType);
-            _orderContext.FinalizeOrder();
             var order = _orderContext.CurrentOrder;
             if (order is null)
                 throw new InvalidOperationException("Order is null.");
             _orderRepository.Save(order);
+            _orderContext.FinalizeOrder();
             return true;
         } catch (InvalidOperationException e)
         {

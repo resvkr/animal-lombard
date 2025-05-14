@@ -30,7 +30,7 @@ public class BoardedAnimal : Animal
 
     public override string ToString()
     {
-        return $"BoardedAnimal: OwnerId: {OwnerId}, FeedingType: {FeedingType}, {AddressInfo} " + base.ToString();
+        return $"BoardedAnimal: OwnerId: {OwnerId}, FeedingType: {FeedingType.ToString()}, {AddressInfo} " + base.ToString();
     }
 
     public static BoardedAnimal Create(

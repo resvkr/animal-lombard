@@ -60,7 +60,7 @@ public class Order
             ? string.Join(", ", AdditionalProducts.Select(p => p.Name))
             : "None";
         return
-            $"Order: {Id}, Customer: {Customer}, Pet: {Pet}, Additional Products: {additionalProducts}, Total Price: {TotalPrice}, Payment Type: {PaymentType}, Created At: {CreatedAt}";
+            $"Order: {Id}, Customer: {Customer}, Pet: {Pet}, Additional Products: {additionalProducts}, Total Price: {TotalPrice}, Payment Type: {PaymentType.ToString()}, Created At: {CreatedAt}";
     }
 
     public static Order Create(User customer, SaleAnimal pet, decimal totalPrice, PaymentType paymentType,

@@ -28,6 +28,11 @@ public class BoardedAnimalRepository : IBoardedAnimalRepository
             : boardedAnimals.FirstOrDefault(u => u.Id == id);
     }
 
+    public List<BoardedAnimal> FindByUserId(string userId)
+    {
+        return boardedAnimals.Where(u => string.Equals(u.OwnerId, userId)).ToList();
+    }
+
     public List<BoardedAnimal> FindAll()
     {
         return boardedAnimals;

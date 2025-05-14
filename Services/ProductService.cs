@@ -1,4 +1,5 @@
-﻿using AnimalLombard.Context.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using AnimalLombard.Context.Interfaces;
 using AnimalLombard.Repository;
 using AnimalLombard.Modals;
 using AnimalLombard.Repository.Interfaces;
@@ -51,12 +52,36 @@ public class ProductService
     {
         _productRepository.Save(product);
     }
+
+    public bool AddProduct(string? name, decimal price, string? description)
+    {
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description) || price <= 0)
+        {
+            Console.WriteLine("Invalid input, please try again");
+            return false;
+        }
+
+        try
+        {
+            var product = Product.Create(name, price, description);
+            _productRepository.Save(product);
+            return true;
+        }
+        catch (ValidationException ex)
+        {
+            Console.WriteLine(ex);
+            return false;
+        }
+    }
     public void UpdateProduct(Product product)
     {
         _productRepository.Save(product);
     }
-    public void DeleteProduct(string productId)
+    public void DeleteProduct(string? productId)
     {
+        if (string.IsNullOrEmpty(productId))
+            throw new ArgumentNullException(nameof(productId));
+        
         _productRepository.Delete(productId);
     }
 }

@@ -21,7 +21,9 @@ public class AuthService
     public User Login(string email, string password)
     {
         var user = _userRepository.FindByEmail(email);
-        if (user == null) throw new ArgumentException("User not found");
+        if (user is null) throw new ArgumentException("User not found");
+        
+        if (user.IsActiveProfile == false) throw new ArgumentException("User has been banned");
 
         if (!HashUtils.VerifyPassword(password, user.PasswordHash)) 
             throw new ArgumentException("Invalid password");

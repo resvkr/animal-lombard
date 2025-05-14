@@ -14,11 +14,11 @@ public class AuthView
     public void ShowLogin()
     {
         Console.WriteLine("Login");
-        Console.WriteLine("Enter your username: ");
-        var username = Console.ReadLine();
+        Console.WriteLine("Enter your email: ");
+        var email = Console.ReadLine();
         Console.WriteLine("Enter your password: ");
         var password = Console.ReadLine();
-        if (string.IsNullOrEmpty(username?.Trim()) || string.IsNullOrEmpty(password?.Trim())) 
+        if (string.IsNullOrEmpty(email?.Trim()) || string.IsNullOrEmpty(password?.Trim())) 
         {
             Console.WriteLine("Invalid input, please try again");
             return;
@@ -26,7 +26,7 @@ public class AuthView
 
         try
         {
-            var user = _authService.Login(username, password);
+            var user = _authService.Login(email, password);
             Console.WriteLine($"Welcome {user.Name}!");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();

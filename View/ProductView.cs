@@ -19,7 +19,7 @@ public class ProductView
             Console.Clear();
             Console.WriteLine("List of available products for sale: (For exit press 'q')");
             var products = _productService.GetProducts(currentPage);
-            
+
             products.ForEach(Console.WriteLine);
 
             Console.WriteLine("Press 'n' for next page, 'p' for previous page, 'q' for exit");
@@ -44,17 +44,48 @@ public class ProductView
             Console.WriteLine("Invalid input, please try again");
             return;
         }
-        
+
         var product = _productService.BuyProduct(id);
-        
+
         if (product is null)
         {
             Console.WriteLine("Product not found or not available for sale");
             return;
         }
-        
+
         Console.WriteLine(product.Name + " was added to your order");
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
+    }
+
+    public void ShowAddProductMenu()
+    {
+        Console.WriteLine("Provide name of the product: ");
+        var name = Console.ReadLine();
+
+        Console.WriteLine("Provide price of the product: ");
+        var price = decimal.Parse(Console.ReadLine() ?? "0");
+
+        Console.WriteLine("You can also provide description of the product: ");
+        var description = Console.ReadLine();
+
+        var success = _productService.AddProduct(name, price, description);
+        Console.WriteLine(success ? "Product added successfully" : "Product not added");
+    }
+
+    public void ShowDeleteProductMenu()
+    {
+        try
+        {
+            Console.WriteLine("Provide id of the product you want to delete: ");
+            var id = Console.ReadLine();
+
+            _productService.DeleteProduct(id);
+            Console.WriteLine("Product deleted successfully");
+        }
+        catch (ArgumentNullException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }
