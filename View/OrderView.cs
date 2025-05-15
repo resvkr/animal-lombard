@@ -1,5 +1,6 @@
 ﻿using AnimalLombard.Modals;
 using AnimalLombard.Services;
+using AnimalLombard.Utils;
 
 namespace AnimalLombard.View;
 
@@ -24,15 +25,9 @@ public class OrderView
     public void PlaceOrder()
     {
         Console.WriteLine("Placing order...");
-        Console.WriteLine("Choose payment method: (Cash/Card)");
-        var paymentType = Console.ReadLine();
-        if (string.IsNullOrEmpty(paymentType) || (paymentType != "Cash" && paymentType != "Card"))
-        {
-            Console.WriteLine("Invalid payment method");
-            return;
-        }
+        var paymentType = EnumUtils.AskEnumValue<PaymentType>("Choose payment method: (Cash/Card)");
 
-        var success = _orderService.PlaceOrder(Enum.Parse<PaymentType>(paymentType));
+        var success = _orderService.PlaceOrder(paymentType);
         Console.WriteLine(success ? "Order placed successfully" : "Failed to place order");
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();

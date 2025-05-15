@@ -23,6 +23,6 @@ public abstract class Animal
 
     public override string ToString()
     {
-        return $"Animal: {Name}, Type: {AnimalType.ToString()}, Species: {Species}";
+        return $"Animal({Id}): {Name}, Type: {AnimalType.ToString()}, Species: {Species}";
     }
 }
