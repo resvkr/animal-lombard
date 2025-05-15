@@ -3,7 +3,7 @@ using AnimalLombard.Repository.Interfaces;
 
 namespace AnimalLombard.Repository;
 
-public class DataStore
+public class DataStore : IDataStore
 {
     public IUserRepository UserRepository { get; }
     public ISaleAnimalRepository SaleAnimalRepository { get; }

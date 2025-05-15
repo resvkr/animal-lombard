@@ -2,7 +2,6 @@
 using AnimalLombard.Modals;
 using AnimalLombard.Repository.Interfaces;
 using AnimalLombard.Services.Interfaces;
-using AnimalLombard.Repository;
 using AnimalLombard.Context.Interfaces;
 
 namespace AnimalLombard.Services;
@@ -12,7 +11,7 @@ public class SaleAnimalService : IAnimalService<SaleAnimal>
     private readonly ISaleAnimalRepository _saleAnimalRepository;
     private readonly IOrderContext _orderContext;
     
-    public SaleAnimalService(DataStore dataStore, IOrderContext orderContext)
+    public SaleAnimalService(IDataStore dataStore, IOrderContext orderContext)
     {
         _saleAnimalRepository = dataStore.SaleAnimalRepository;
         _orderContext = orderContext;

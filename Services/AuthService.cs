@@ -3,7 +3,6 @@ using AnimalLombard.Context.Interfaces;
 using AnimalLombard.Modals;
 using AnimalLombard.Repository.Interfaces;
 using AnimalLombard.Utils;
-using AnimalLombard.Repository;
 
 namespace AnimalLombard.Services;
 
@@ -12,7 +11,7 @@ public class AuthService
     private readonly IUserRepository _userRepository;
     private readonly IMutableUserContext _userContext;
 
-    public AuthService(DataStore dataStore, IMutableUserContext userContext)
+    public AuthService(IDataStore dataStore, IMutableUserContext userContext)
     {
         _userRepository = dataStore.UserRepository;
         _userContext = userContext;
